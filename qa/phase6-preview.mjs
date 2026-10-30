@@ -1,0 +1,11 @@
+﻿import { chromium } from 'playwright'
+const browser=await chromium.launch({channel:'chrome',headless:true})
+const page=await browser.newPage({viewport:{width:1200,height:630},deviceScaleFactor:1})
+page.on('requestfailed',r=>console.log('FAILED',r.url()))
+page.on('response',r=>{if(r.status()>=400)console.log('BAD',r.status(),r.url())})
+await page.goto('http://127.0.0.1:5173/',{waitUntil:'networkidle'})
+await page.waitForTimeout(1800)
+await page.screenshot({path:'public/social-preview.jpg',type:'jpeg',quality:88})
+await page.screenshot({path:'qa-screenshots/phase6/social-preview-review.png'})
+console.log(await page.evaluate(()=>({title:document.title,description:document.querySelector('meta[name=description]')?.content,ogTitle:document.querySelector('meta[property="og:title"]')?.content,ogImage:document.querySelector('meta[property="og:image"]')?.content,card:document.querySelector('meta[name="twitter:card"]')?.content,scene:!!document.querySelector('.scene-canvas')})))
+await browser.close()

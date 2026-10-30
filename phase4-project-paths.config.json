@@ -1,0 +1,6 @@
+{
+  "comment": "Phase 4 only. Replace each value with the exact local project directory before any source inspection. The documented inspection workflow is scoped to these three paths.",
+  "VELORA_PATH": "REPLACE_WITH_VELORA_PATH",
+  "AETHER_PATH": "REPLACE_WITH_AETHER_PATH",
+  "ORVE_PATH": "REPLACE_WITH_ORVE_PATH"
+}
